@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [Candidates::class], version = 1)
+@Database(entities = [Candidates::class], version = 1, exportSchema = false)
 abstract class HiringDatabase : RoomDatabase() {
     abstract fun hiringDao(): HiringDao
 }

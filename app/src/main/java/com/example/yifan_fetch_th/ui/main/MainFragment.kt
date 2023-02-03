@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yifan_fetch_th.R
 import com.example.yifan_fetch_th.database.Candidates
 import kotlinx.android.synthetic.main.candidate_list.view.*
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 
 class MainFragment : Fragment() {
 
@@ -23,6 +25,7 @@ class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private lateinit var candidatesRecycler: RecyclerView
     private lateinit var adapter: CandidatesAdapter
+    val args: MainFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -35,12 +38,12 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        viewModel.parseJson()
-        adapter=CandidatesAdapter()
+        adapter = CandidatesAdapter()
+        val candidatesList = viewModel.parseOutput(args.targetListId)
         candidatesRecycler = view.findViewById(R.id.candidates_recycler)
         candidatesRecycler.layoutManager = LinearLayoutManager(context)
         candidatesRecycler.adapter = adapter
-        viewModel.candidateList.observe(viewLifecycleOwner, Observer {
+        candidatesList.observe(viewLifecycleOwner, Observer {
             adapter.updateWords(it)
         })
     }

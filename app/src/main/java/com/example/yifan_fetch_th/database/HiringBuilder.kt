@@ -43,4 +43,12 @@ class HiringBuilder private constructor(context: Context) {
     }
 
     fun showResults(): LiveData<List<Candidates>> = hiringDao.showResults()
+
+    fun showList1(): LiveData<List<Candidates>> = hiringDao.showlist1()
+
+    fun showList2(): LiveData<List<Candidates>> = hiringDao.showlist2()
+
+    fun showList3(): LiveData<List<Candidates>> = hiringDao.showlist3()
+
+    fun showList4(): LiveData<List<Candidates>> = hiringDao.showlist4()
 }

@@ -3,6 +3,7 @@ package com.example.yifan_fetch_th.ui.main
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -13,9 +14,10 @@ import org.json.JSONArray
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     init {
         HiringBuilder.initialize(application)
+        parseJson()
     }
+
     private val builder = HiringBuilder.get()
-    val candidateList = HiringBuilder.get().showResults()
     private var dataURL: String = "https://fetch-hiring.s3.amazonaws.com/hiring.json"
 
     /* Parse Json file using the URL above.
@@ -36,5 +38,17 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             },
             { Log.e("Error", "Retrieve JSON FAILED!!") })
         queue.add(stringRequest)
+    }
+
+    fun parseOutput(targetListId: Int): LiveData<List<Candidates>> {
+        val temp: LiveData<List<Candidates>>
+        when (targetListId) {
+            1 -> temp = HiringBuilder.get().showList1()
+            2 -> temp = HiringBuilder.get().showList2()
+            3 -> temp = HiringBuilder.get().showList3()
+            4 -> temp = HiringBuilder.get().showList4()
+            else -> temp = HiringBuilder.get().showResults()
+        }
+        return temp
     }
 }

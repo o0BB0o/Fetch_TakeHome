@@ -3,4 +3,5 @@
     <string name="id">ID: </string>
     <string name="listid">ListID: </string>
     <string name="name">Name: </string>
+    <string name="welcometext"> Please select the display filter. </string>
 </resources>
