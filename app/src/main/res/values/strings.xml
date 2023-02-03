@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Yifan_Fetch_TH</string>
+    <string name="id">ID: </string>
+    <string name="listid">ListID: </string>
+    <string name="name">Name: </string>
+</resources>
